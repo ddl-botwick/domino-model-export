@@ -3,12 +3,13 @@ import numpy as np
 
 loaded_model = pickle.load(open("/mnt/artifacts/results/gb1.pkl", "rb"))
 
-def predict(dropperc, mins, consecmonths, income):
+def predict(dropperc, mins, consecmonths, income, age):
     features=[]
     features.append(dropperc)
     features.append(mins)
     features.append(consecmonths)
     features.append(income)
+    features.append(age)
     final = np.reshape(features, (1, -1))
     # Call the model's predict_proba() function with the input features
     # https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html#sklearn.ensemble.GradientBoostingClassifier.predict_proba
