@@ -8,7 +8,7 @@ export DOMINO_PROJECT_NAME="Model-Pipeline-GBP"
 export DOMINO_PROJECT_OWNER="elliott_botwick"
 
 export PROJECT_ID="60f829fad7e1834bafb5fd02"
-export MODEL_ID="60f88810a853091aa99a7c54" #This is as we are publishing a new version of an already existing model API
+export MODEL_ID="60f89bb8a853091aa99a7caa" #This is as we are publishing a new version of an already existing model API
 export MODEL_FILE="predict.py"
 export MODEL_FUNCTION="predict"
 
@@ -33,24 +33,24 @@ function domino_job_run {
     echo 'response'
     echo $RESPONSE
     echo 'run id'
-#     DOMINO_RUN_ID=$(echo "$RESPONSE" | jq -r '.runId')
-#     echo $DOMINO_RUN_ID
+    DOMINO_RUN_ID=$(echo "$RESPONSE" | jq -r '.runId')
+    echo $DOMINO_RUN_ID
 
-#     echo "Run $DOMINO_RUN_ID has started. Waiting for the run to complete."
+    echo "Run $DOMINO_RUN_ID has started. Waiting for the run to complete."
 
-#     while true; do
-#         sleep 5
-#         domino_job_status $DOMINO_RUN_ID
+    while true; do
+        sleep 5
+        domino_job_status $DOMINO_RUN_ID
         
-#         if [[ "$DOMINO_RUN_STATUS" == "Succeeded" ]]; then break; fi
-#         if [[ "$DOMINO_RUN_STATUS" == "Failed" ]]; then
-#             echo "Run $DOMINO_RUN_ID has failed. Please see the run logs."
-#             echo "Stopping the remainder of this job from running"
-#             exit 1
-#         fi
-#     done
+        if [[ "$DOMINO_RUN_STATUS" == "Succeeded" ]]; then break; fi
+        if [[ "$DOMINO_RUN_STATUS" == "Failed" ]]; then
+            echo "Run $DOMINO_RUN_ID has failed. Please see the run logs."
+            echo "Stopping the remainder of this job from running"
+            exit 1
+        fi
+    done
     
-#     echo "Run $DOMINO_RUN_ID has completed"
+    echo "Run $DOMINO_RUN_ID has completed"
     echo "Run completed!"
 }
 
