@@ -2,7 +2,7 @@ from time import sleep
 import pprint
 from domino_export import DominoExport
 from os import getenv
-
+print('Exporting model to Elastic Container Registry')
 # Set up Domino Export API
 domino_model_id = getenv("MODEL_ID")
 domino_export = DominoExport()
