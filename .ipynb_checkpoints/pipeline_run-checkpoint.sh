@@ -56,19 +56,19 @@ function domino_job_run {
 
 # Step 1: Retrain model
 echo "Retraining model..."
-domino_job_run "train_model.py" "[Lifecycle.sh] Retraining Model"
+domino_job_run "train_model.py" "[pipeline_run.sh] Retraining Model"
 
 # Step 2: Deploy Model as Domino Model API
 echo "Deploying model as a Domino Model API..."
-domino_job_run "deploy_model.sh $PROJECT_ID $MODEL_ID $MODEL_FILE $MODEL_FUNCTION" "[Lifecycle.sh] Deploying Model to Domino"
+domino_job_run "deploy_model.sh $PROJECT_ID $MODEL_ID $MODEL_FILE $MODEL_FUNCTION" "[pipeline_run.sh] Deploying Model to Domino"
 
 # Step 3: Test Model API Endpoint to validate results
 echo "Testing Domino Model API Endpoint..."
-domino_job_run "test_model.sh $MODEL_ID" "[Lifecycle.sh] Test Model"
+domino_job_run "test_model.sh $MODEL_ID" "[pipeline_run.sh] Test Model"
 
 # Step 4: Publish model to ECR
 echo "Pushing model API endpoint to AWS Elastic Container Registry..."
-domino_job_run "export_model.sh $MODEL_ID" "[Lifecycle.sh] Publish Model to ECR"
+domino_job_run "export_model.sh $MODEL_ID" "[pipeline_run.sh] Publish Model to ECR"
 
 # Step 5: Run model on production server
 echo "Running model on production EC2 server..."
