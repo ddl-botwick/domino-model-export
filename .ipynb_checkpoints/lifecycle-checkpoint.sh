@@ -2,13 +2,13 @@
 
 set -e
 
-export DOMINO_API_HOST="https://demo.dominodatalab.com"
-export DOMINO_USER_API_KEY="50266f49641af73f99a174c4d66e002560bda79b227216c8262795bd48942fc1"
-export DOMINO_PROJECT_NAME="ModelExportPipeline"
-export DOMINO_PROJECT_OWNER="igor_marchenko"
+export DOMINO_API_HOST="demo.dominodatalab.com"
+export DOMINO_USER_API_KEY="026fdf4a4876ce308808b6f2ea2426ed3faa0649553c1db539ae4ea5f895016e"
+export DOMINO_PROJECT_NAME="Model-Pipeline-GBP"
+export DOMINO_PROJECT_OWNER="elliott_botwick"
 
-export PROJECT_ID="603a915f5269971ee08c1e40"
-export MODEL_ID="603a943ecc42014cc2ddda51"
+export PROJECT_ID="60f829fad7e1834bafb5fd02"
+export MODEL_ID="60f88810a853091aa99a7c54" #This is as we are publishing a new version of an already existing model API
 export MODEL_FILE="predict.py"
 export MODEL_FUNCTION="predict"
 
@@ -28,24 +28,30 @@ function domino_job_run {
 
     echo "Running on Domino (${DOMINO_PROJECT_OWNER}/${DOMINO_PROJECT_NAME}): $1"
     PAYLOAD="{\"command\": $COMMAND, \"title\": \"${2}\", \"isDirect\": false}"
+    echo $PAYLOAD
     RESPONSE=$(curl ${DOMINO_API_HOST}/v1/projects/${DOMINO_PROJECT_OWNER}/${DOMINO_PROJECT_NAME}/runs -s -H "X-Domino-Api-Key: ${DOMINO_USER_API_KEY}" -H 'Content-Type: application/json' -d "${PAYLOAD}")
-    DOMINO_RUN_ID=$(echo "$RESPONSE" | jq -r '.runId')
+    echo 'response'
+    echo $RESPONSE
+    echo 'run id'
+#     DOMINO_RUN_ID=$(echo "$RESPONSE" | jq -r '.runId')
+#     echo $DOMINO_RUN_ID
 
-    echo "Run $DOMINO_RUN_ID has started. Waiting for the run to complete."
+#     echo "Run $DOMINO_RUN_ID has started. Waiting for the run to complete."
 
-    while true; do
-        sleep 5
-        domino_job_status $DOMINO_RUN_ID
+#     while true; do
+#         sleep 5
+#         domino_job_status $DOMINO_RUN_ID
         
-        if [[ "$DOMINO_RUN_STATUS" == "Succeeded" ]]; then break; fi
-        if [[ "$DOMINO_RUN_STATUS" == "Failed" ]]; then
-            echo "Run $DOMINO_RUN_ID has failed. Please see the run logs."
-            echo "Stopping the remainder of this job from running"
-            exit 1
-        fi
-    done
+#         if [[ "$DOMINO_RUN_STATUS" == "Succeeded" ]]; then break; fi
+#         if [[ "$DOMINO_RUN_STATUS" == "Failed" ]]; then
+#             echo "Run $DOMINO_RUN_ID has failed. Please see the run logs."
+#             echo "Stopping the remainder of this job from running"
+#             exit 1
+#         fi
+#     done
     
-    echo "Run $DOMINO_RUN_ID has completed"
+#     echo "Run $DOMINO_RUN_ID has completed"
+    echo "Run completed!"
 }
 
 # Step 1: Retrain model

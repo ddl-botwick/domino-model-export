@@ -1,3 +1,4 @@
+print('starting train_model.py script')
 # Setup
 
 import sklearn as sk
@@ -8,8 +9,7 @@ import pickle
 
 # Import Data
 dataFile = os.path.join(
-    "/mnt/data",
-    "churn-data",
+    "/mnt/artifacts",
     "smallPrepared.csv"
 )
 
