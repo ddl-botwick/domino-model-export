@@ -2,7 +2,7 @@
 
 set -e
 
-export DOMINO_API_HOST="demo.dominodatalab.com"
+export DOMINO_API_HOST="https://demo.dominodatalab.com"
 export DOMINO_USER_API_KEY="026fdf4a4876ce308808b6f2ea2426ed3faa0649553c1db539ae4ea5f895016e"
 export DOMINO_PROJECT_NAME="Model-Pipeline-GBP"
 export DOMINO_PROJECT_OWNER="elliott_botwick"

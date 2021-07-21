@@ -9,7 +9,7 @@ import pickle
 
 # Import Data
 dataFile = os.path.join(
-    "/mnt/artifacts",
+    "/mnt/artifacts/data",
     "smallPrepared.csv"
 )
 
